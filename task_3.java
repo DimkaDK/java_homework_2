@@ -17,26 +17,44 @@ public class task_3 {
 
     static void parsingJspon(String lineJson){
 
+        // методы replace() и replaceAll(), как-то по особенному относяться к символам '[' и '{', пришлось убирать их замысловато
+
+        String lineWorking = "";                 
+
         for (int i = 0; i < lineJson.length(); i++){
-            if(lineJson.charAt(i) == '"'){
- 
+            if (lineJson.charAt(i) == '{' || lineJson.charAt(i) == '}' || lineJson.charAt(i) == '[' || lineJson.charAt(i) == ']'|| lineJson.charAt(i) == '\"' ){                
             }
-
-
+            else{                
+                lineWorking += lineJson.charAt(i);
+            }                
         }
-        System.out.println(lineJson);
 
-
-
+        String[] student = lineWorking.split(",");
+        String[] studentOut = new String[2];
+        String infoOut = "";       
+                
+        for (int i = 0; i < student.length; i++){
+            studentOut = (student[i].split(":"));
+            
+            if (studentOut[0].equals("фамилия")){                
+                infoOut += "Студент " + studentOut[1] + " ";
+            }
+            else if (studentOut[0].equals("оценка")){                
+                infoOut += "получил " + studentOut[1] + " ";
+            }
+            else{
+                infoOut += "по предмету " + studentOut[1] + "\n";
+            }
+        }
+        System.out.println(infoOut);
     }
+
     public static void main(String[] args) throws Exception{
 
         String line = "empty";
 
         try {
-            String pathProject = "./java_homework_2";
-            String pathFile = pathProject.concat("/students.json");
-            File file = new File(pathFile);
+            File file = new File("./java_homework_2/students.json");
             BufferedReader bufReader = new BufferedReader(new FileReader(file));
             line = bufReader.readLine();
             bufReader.close();
