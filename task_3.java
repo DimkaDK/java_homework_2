@@ -31,19 +31,18 @@ public class task_3 {
 
         String[] student = lineWorking.split(",");
         String[] studentOut = new String[2];
-        String infoOut = "";       
+        StringBuilder infoOut = new StringBuilder();   
                 
         for (int i = 0; i < student.length; i++){
-            studentOut = (student[i].split(":"));
-            
+            studentOut = (student[i].split(":"));            
             if (studentOut[0].equals("фамилия")){                
-                infoOut += "Студент " + studentOut[1] + " ";
+                infoOut.append("Студент " + studentOut[1] + " ");
             }
             else if (studentOut[0].equals("оценка")){                
-                infoOut += "получил " + studentOut[1] + " ";
+                infoOut.append("получил " + studentOut[1] + " ");
             }
             else{
-                infoOut += "по предмету " + studentOut[1] + "\n";
+                infoOut.append("по предмету " + studentOut[1] + "\n");
             }
         }
         System.out.println(infoOut);
